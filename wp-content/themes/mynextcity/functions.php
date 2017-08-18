@@ -440,14 +440,14 @@ function create_post_type_html5()
 
 
 
-// Registers a new Page type for Dribble Shots
+// Registers a new Page type for States
 add_action( 'init', 'register_state' );
 function register_state() {
 
 	$labels = array( 
 		'name' => _x( 'States', 'states' ),
 		'singular_name' => _x( 'State', 'states' ),
-		'add_new' => _x( 'Add New State', 'states' ),
+		'add_new' => _x( 'Add A New State', 'states' ),
 		'add_new_item' => _x( 'Add New State', 'states' ),
 		'edit_item' => _x( 'Edit State', 'states' ),
 		'new_item' => _x( 'New State', 'states' ),
@@ -488,6 +488,56 @@ function register_state() {
 		'rewrite' => true)
 	);
     register_post_type( 'states', $args );
+}
+
+// Registers a new Page type for Cities
+add_action( 'init', 'register_city' );
+function register_city() {
+
+	$labels = array( 
+		'name' => _x( 'Cities', 'cities' ),
+		'singular_name' => _x( 'City', 'cities' ),
+		'add_new' => _x( 'Add A New City', 'cities' ),
+		'add_new_item' => _x( 'Add A New City', 'cities' ),
+		'edit_item' => _x( 'Edit City', 'cities' ),
+		'new_item' => _x( 'New City', 'cities' ),
+		'view_item' => _x( 'View City', 'cities' ),
+		'search_items' => _x( 'Search Cities', 'cities' ),
+		'not_found' => _x( 'No Cities found', 'cities' ),
+		'not_found_in_trash' => _x( 'No cities found in trash', 'cities' ),
+		'menu_name' => _x( 'Cities', 'cities' ),
+		);
+
+	$args = array( 
+		'labels' => $labels,
+		'hierarchical' => false,
+		'description' => 'Page type designated for cities',
+		'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+		'taxonomies' => array( 'page-category', 'cities' ),
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 22,
+		'menu_icon' => 'dashicons-location',
+		'show_in_nav_menus' => false,
+		'publicly_queryable' => true,
+		'exclude_from_search' => false,
+		'has_archive' => true,
+		'query_var' => true,
+		'can_export' => true,
+		'rewrite' => array("slug" => "cities", 'with_front' => true), // Permalinks format
+		'capability_type' => 'page',
+    );
+	register_taxonomy('cities_category', array('cities'), array(
+		'hierarchical' => true,
+		'label' => 'Categories',
+		'singular_label' => 'Category',
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => true)
+	);
+    register_post_type( 'cities', $args );
 }
 
 
