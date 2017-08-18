@@ -1,45 +1,37 @@
-<?php /* Template Name: States Page Template */ get_header(); ?>
+<?php /* Template Name: Archive States Template */ get_header(); ?>
 
-	<main role="main">
-		<!-- section -->
-		<section>
+<?php
+// WP_Query arguments
 
-			<h1><?php the_title(); ?></h1>
+	//* The Query
+	$exec_query = new WP_Query( array (
+		'post_type' => 'states',
+		'posts_per_page' => 50,
+		'order' => 'ASC',
+		'orderby' => 'title'
+	) );
 
-		<?php if (have_posts()): while (have_posts()) : the_post(); ?>
+	//* The Loop
+	if ( $exec_query->have_posts() ) { ?>
 
-			<!-- article -->
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<h3 class="title">Test</h3>
 
-				<?php the_content(); ?>
+		<ul> <?php
 
-				<?php comments_template( '', true ); // Remove if you don't want comments ?>
+			while ( $exec_query->have_posts() ): $exec_query->the_post(); ?>
 
-				<br class="clear">
+			<li>
+				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+			</li> <?php
 
-				<?php edit_post_link(); ?>
+			endwhile; ?>
 
-			</article>
-			<!-- /article -->
+		</ul>
+<?php
+	//* Restore original Post Data
+	wp_reset_postdata();
+}?>
 
-		<?php endwhile; ?>
 
-		<?php else: ?>
-
-			<!-- article -->
-			<article>
-
-				<h2><?php _e( 'Sorry, nothing to display.', 'html5blank' ); ?></h2>
-
-			</article>
-			<!-- /article -->
-
-		<?php endif; ?>
-
-		</section>
-		<!-- /section -->
-	</main>
-
-<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>

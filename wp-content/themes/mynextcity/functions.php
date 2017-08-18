@@ -444,41 +444,49 @@ function create_post_type_html5()
 add_action( 'init', 'register_state' );
 function register_state() {
 
-    $labels = array( 
-        'name' => _x( 'States', 'states' ),
-        'singular_name' => _x( 'State', 'states' ),
-        'add_new' => _x( 'Add New State', 'states' ),
-        'add_new_item' => _x( 'Add New State', 'states' ),
-        'edit_item' => _x( 'Edit State', 'states' ),
-        'new_item' => _x( 'New State', 'states' ),
-        'view_item' => _x( 'View State', 'states' ),
-        'search_items' => _x( 'Search States', 'states' ),
-        'not_found' => _x( 'No States found', 'states' ),
-        'not_found_in_trash' => _x( 'No States found in Trash', 'states' ),
-        // 'parent' => _('employees'),
-        'menu_name' => _x( 'States', 'states' ),
-        );
+	$labels = array( 
+		'name' => _x( 'States', 'states' ),
+		'singular_name' => _x( 'State', 'states' ),
+		'add_new' => _x( 'Add New State', 'states' ),
+		'add_new_item' => _x( 'Add New State', 'states' ),
+		'edit_item' => _x( 'Edit State', 'states' ),
+		'new_item' => _x( 'New State', 'states' ),
+		'view_item' => _x( 'View State', 'states' ),
+		'search_items' => _x( 'Search States', 'states' ),
+		'not_found' => _x( 'No States found', 'states' ),
+		'not_found_in_trash' => _x( 'No States found in Trash', 'states' ),
+		'menu_name' => _x( 'States', 'states' ),
+		);
 
-    $args = array( 
-        'labels' => $labels,
-        'hierarchical' => false,
-        'description' => 'Page type designated for states',
-        'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
-        'taxonomies' => array( 'page-category', 'states' ),
-        'public' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'menu_position' => 22,
-        'menu_icon' => 'dashicons-location-alt',
-        'show_in_nav_menus' => false,
-        'publicly_queryable' => true,
-        'exclude_from_search' => false,
-        'has_archive' => false,
-        'query_var' => true,
-        'can_export' => true,
-        'rewrite' => array("slug" => "states", 'with_front' => true), // Permalinks format
-        'capability_type' => 'page',
-);
+	$args = array( 
+		'labels' => $labels,
+		'hierarchical' => false,
+		'description' => 'Page type designated for states',
+		'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+		'taxonomies' => array( 'page-category', 'states' ),
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 22,
+		'menu_icon' => 'dashicons-location-alt',
+		'show_in_nav_menus' => false,
+		'publicly_queryable' => true,
+		'exclude_from_search' => false,
+		'has_archive' => true,
+		'query_var' => true,
+		'can_export' => true,
+		'rewrite' => array("slug" => "states", 'with_front' => true), // Permalinks format
+		'capability_type' => 'page',
+    );
+	register_taxonomy('states_category', array('states'), array(
+		'hierarchical' => true,
+		'label' => 'Categories',
+		'singular_label' => 'Category',
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => true)
+	);
     register_post_type( 'states', $args );
 }
 
