@@ -475,7 +475,7 @@ function register_state() {
 		'has_archive' => true,
 		'query_var' => true,
 		'can_export' => true,
-		'rewrite' => array("slug" => "states", 'with_front' => true), // Permalinks format
+		'rewrite' => array("slug" => "states", 'hierarchical' => true, 'with_front' => true), // Permalinks format
 		'capability_type' => 'page',
     );
 	register_taxonomy('states_category', array('states'), array(
@@ -513,7 +513,7 @@ function register_city() {
 		'hierarchical' => false,
 		'description' => 'Page type designated for cities',
 		'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
-		'taxonomies' => array( 'page-category', 'cities' ),
+		'taxonomies' => array( 'states', 'cities' ),
 		'public' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
